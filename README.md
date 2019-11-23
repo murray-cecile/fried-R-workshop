@@ -4,13 +4,13 @@
 
 #### Assistant: Lilian Huang, AB 2016, MSCAPP 2020
 
-This four-part workshop series is designed to teach the fundamentals of programmatic data analysis in R for the undergraduate students in UChicago's Fried Public Service Scholars program. 
+This four-part workshop series is designed to teach the fundamentals of programmatic data analysis in R for the undergraduate students in UChicago's Fried Public Policy and Service Scholars program. 
 
 ## Overview
 
-Each workshop will be split between a presentation and a "lab" portion, in which students will have the opportunity to work through a data analysis exercise on their own with the support of their peers and the instructors.
+The series will give students who are interested in public policy careers an introduction to the kinds of data analysis tasks they might encounter in a professional setting and to the fundamentals of performing those tasks in R. 
 
-The series is intended to give students who are interested in public policy careers an introduction to the kinds of data analysis tasks they might encounter in a professional setting, as well as to expose them to the fundamentals of data analysis in R. 
+Each workshop will be split between a presentation and a "lab" portion, in which students will have the opportunity to work through a data analysis exercise on their own with the support of their peers and the instructors.
 
 Students will work with real world data from the U.S. Census and from the City of Chicago's open data portal. The exercises will be inspired by the tasks that research assistants and analysts at the nation's leading public policy research institutions perform as the core of their job duties. 
 
