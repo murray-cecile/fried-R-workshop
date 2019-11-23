@@ -20,6 +20,9 @@ The workshop goals are as follows:
 - Teach students the fundamentals of data cleaning, assembly, and analysis in R
 - Introduce basic programming concepts such as loops, conditionals, and functions and demonstrate how these concepts can be applied in data analysis
 
+![Before](examples/spreadsheet.png)
+![After](examples/code.png)
+
 ## Workshop schedule
 
 1. Why we use programming for data analysis + getting started in RStudio
