@@ -20,8 +20,8 @@ The workshop goals are as follows:
 - Teach students the fundamentals of data cleaning, assembly, and analysis in R
 - Introduce basic programming concepts such as loops, conditionals, and functions and demonstrate how these concepts can be applied in data analysis
 
-![Before](examples/spreadsheet.png)
-![After](examples/code.png)
+<!-- ![Before](~/Documents/coding/fried-R-workshop/examples/spreadsheet.png)
+![After](~/Documents/coding/fried-R-workshop/examples/code.png) -->
 
 ## Workshop schedule
 
