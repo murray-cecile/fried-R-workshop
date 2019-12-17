@@ -7,6 +7,8 @@ output: ioslides_presentation
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+libs <- c("here", "tidyverse", "magrittr", "knitr", "kableExtra", "janitor")
+lapply(libs, library, character.only = TRUE)
 ```
 
 ## Course goals
@@ -53,9 +55,37 @@ Some disadvantages:
 
 ## Why use R?
 
+```{r whyR, echo=FALSE, warning=FALSE}
+use_cases <- c("Free?",
+               "Nice user interface",
+               "Ease of data assembly",
+               "Ease of descriptive stats",
+               "Quality of visualization",
+               "More complex modeling",
+               "General-purpose programming")
+
+tools <- c("Excel", "Stata", "Python", "R")
+
+r <- c("Yes", "Yes", "Excellent", "Very good", "Excellent", "Yes", "Yes")
+excel <- c("No*", "Yes", "Good", "Very good", "Good", "No", "No")
+stata <- c("No", "Yes", "Good", "Excellent", "Mediocre", "Yes", "No")
+python <- c("Yes", "No", "Good", "Good", "Good", "Yes", "Yes")
+
+# make a table out of these
+tibble(use_cases, excel, stata, python, r) %>% 
+  kable(caption = "Comparing common data analysis tools", 
+        col.names = c("", tools)) %>% 
+  kable_styling(latex_options = "HOLD") %>% 
+  add_footnote("*But your organization probably already paid for MS Office")
+```
+
 ## R vs. RStudio
 
-## Basics
+R = the programming language
+
+RStudio = an integrated development environment (IDE) for R, aka a nice interface
+
+
 
 
 

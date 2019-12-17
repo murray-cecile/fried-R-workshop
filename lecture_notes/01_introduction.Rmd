@@ -85,7 +85,7 @@ use_cases <- c("Free?",
                "More complex modeling",
                "General-purpose programming")
 
-tools <- c("R", "Excel", "Stata", "Python")
+tools <- c("Excel", "Stata", "Python", "R")
 
 r <- c("Yes", "Yes", "Excellent", "Very good", "Excellent", "Yes", "Yes")
 excel <- c("No*", "Yes", "Good", "Very good", "Good", "No", "No")
@@ -191,7 +191,7 @@ In R, I most often work with vectors and dataframes. Vectors and matrices come u
 
 ```{r basic_types}
 1 + 1
-'1' + 1
+# '1' + 1 won't run
 
 # vector
 vec1 <- c(1, 2, 3, 4)
@@ -240,18 +240,48 @@ library(tidyverse)
 crimes <- read_csv("../data/Crimes_-_2018.csv")
 ```
 
-We can see that `crimes` is now an object in our environment. We can click on it to view it. 
+We can see that `crimes` is now an object in our environment. We can click on it to view it, or use `View(crimes)`. 
 
 Crimes is a data frame, which is basically a more sophisticated kind of matrix.
 
 ```{r explore_crimes}
-# this is the same as clicking on it
-View(crimes)
-
-# and this is a way of looking at it in the console
+# this is a way of looking at it in the console
 glimpse(crimes)
 
 # each column is a vector, but we can refer to them by name
 crimes$Date[1:10]
+
+# here are the column names
+names(crimes)
 ```
 
+### Basic cleaning and exploration (more to come)
+
+Notice above that some of these names have backticks surrounding them. That's because they contain spaces, which are not a valid part of names in R. Fixing this and standardizing them will make working with the data much easier.
+
+```{r renaming}
+# we could type out a new vector of names and do something like this:
+original_names <- names(crimes)
+# names(crimes) <- c("id", "case_number", "date", "block",...)
+
+# instead, let's use a function from the janitor package:
+crimes <- janitor::clean_names(crimes)
+
+# much better
+names(crimes)
+```
+
+## Exercise: 
+
+1. Go to data.cityofchicago.org. This is the city's open data portal. It hosts a lot of interesting datasets on topics from crime to 311 requests to rodent complaints. Find and download a dataset you think is interesting.
+
+2. Load the data into R. 
+
+3. Explore it - try to learn 3-5 facts from summarizing the data.
+
+Some best practices to follow:
+- keep your files organized in a folder system: for example, create a main project folder with one subfolder for raw data, one subfolder for R scripts, etc.
+- keep a record of how you downloaded the data, and keep a copy of your raw data that you do not modify
+- using the console is fine for exploration and debugging, but keep your successful commands in a script file
+- use comments to annotate your work
+- consider creating a final version of your script that contains only the code necessary to back up your key insights.

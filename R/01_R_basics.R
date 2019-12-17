@@ -118,3 +118,32 @@ glimpse(crimes)
 
 # data frames are like matrices, but we can refer to columns by name
 crimes$Date
+
+# we can see the column names like this: 
+names(crimes)
+
+# to get rid of backticks and caps, we could type out a new vector of names:
+#  like, names(crimes) <- c("id", "case_number", "date", "block",...)
+
+# instead, let's use a function from the janitor package:
+crimes <- janitor::clean_names(crimes)
+
+# much better
+names(crimes)
+
+#===============================================================================#
+# EXPLORING DATA
+#===============================================================================#
+
+# how many crimes were reported last year?
+nrow(crimes)
+
+# how many arrests?
+sum(crimes$Arrest)
+
+# how many kinds of crime?
+length(unique(crimes$`Primary Type`))
+
+# count of crimes by type
+table(crimes$`Primary Type`)
+

@@ -411,6 +411,7 @@ $(document).ready(function () {
 <li>Talk about when doing data analysis programmatically is advantageous</li>
 <li>Introduce the tools we’ll be using in this series</li>
 </ol>
+<p>Key terms: script, package, working directory, environment</p>
 <p><strong>Question for the room:</strong> What do you want to get out of this workshop series?</p>
 </div>
 <div id="why-write-code" class="section level2">
@@ -473,9 +474,6 @@ Comparing common data analysis tools
 <th style="text-align:left;">
 </th>
 <th style="text-align:left;">
-R
-</th>
-<th style="text-align:left;">
 Excel
 </th>
 <th style="text-align:left;">
@@ -483,6 +481,9 @@ Stata
 </th>
 <th style="text-align:left;">
 Python
+</th>
+<th style="text-align:left;">
+R
 </th>
 </tr>
 </thead>
@@ -616,8 +617,195 @@ Yes
 </tfoot>
 </table>
 </div>
-<div id="r-vs.-rstudio" class="section level2">
-<h2>R vs. RStudio</h2>
+<div id="r-and-rstudio" class="section level2">
+<h2>R and RStudio</h2>
+<p>R = the programming language</p>
+<p>RStudio = an integrated development environment (IDE) for R, aka a nice interface</p>
+</div>
+<div id="getting-to-know-rstudio" class="section level2">
+<h2>Getting to know RStudio</h2>
+<ul>
+<li>different panels: script, console, environment, files, packages, help</li>
+<li>console vs. scripts</li>
+<li>Run commands by hitting enter (in the console) or highlighting and</li>
+</ul>
+</div>
+<div id="r-basics" class="section level2">
+<h2>R Basics</h2>
+<div id="basic-mathematical-operations-in-r" class="section level3">
+<h3>Basic mathematical operations in R</h3>
+<p>Performing basic computations works pretty much as you’d expect: you can use the normal math operators and functions.</p>
+<pre class="r"><code>1 + 1 </code></pre>
+<pre><code>## [1] 2</code></pre>
+<pre class="r"><code>1 * 5</code></pre>
+<pre><code>## [1] 5</code></pre>
+<pre class="r"><code>(20 / 4) * 2</code></pre>
+<pre><code>## [1] 10</code></pre>
+<pre class="r"><code>2 ^ 2 # also, 2**2</code></pre>
+<pre><code>## [1] 4</code></pre>
+<pre class="r"><code># this is a comment: that means R doesn&#39;t try to evaluate what you&#39;ve written
+# comments allow you to annotate what you&#39;re doing: they are your friend!
+
+# this is how you save a value in a variable: we are saying x is 5
+# think of this as associating a name with some object
+x &lt;- 5
+x</code></pre>
+<pre><code>## [1] 5</code></pre>
+<pre class="r"><code>x == 5</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code># we can also change the value of x
+x &lt;- 7
+x == 5</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+</div>
+<div id="comparisons-and-logical-operators" class="section level3">
+<h3>Comparisons and logical operators</h3>
+<p>Programming languages are based on logical statements: expressions that are either true or false. Comparison operators and logical operators help us construct such statements.</p>
+<p>Comparison operators compare two things: for example, are they equal, or is one greater than or equal to the other.</p>
+<pre class="r"><code>1 == 1</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>1 == 2</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>1 != 2</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>5 &gt;= 4</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>-1 &lt; 0</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code># side note on computers and decimal accuracy (this happens in Excel too)
+1.000000000000001 == 1</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>1.0000000000000001 == 1</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>Logical operators allow you to combine true/false statements.</p>
+<pre class="r"><code># &amp; is AND: means both are true
+1 == 1 &amp; 2 == 2 </code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>1 == 1 &amp; 1 == 2</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code># | is OR: means at least one is true
+1 == 1 &amp; 1 == 2</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>1 == 2 &amp; 2 == 3</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code># ! is NOT: means the statement is not true
+!(1 == 1)</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>!(1 == 2)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+</div>
+<div id="types-of-objects" class="section level3">
+<h3>Types of objects</h3>
+<p>Basic types:</p>
+<ul>
+<li>Numeric: 1, 3.14, 2020</li>
+<li>Character, aka strings: ‘a’, “data”</li>
+<li>Logical: TRUE or FALSE</li>
+</ul>
+<p>Data structures:</p>
+<ul>
+<li>Vectors: a list of values (numbers, strings, etc)</li>
+<li>Matrix: a group of vectors</li>
+<li>Data frame: a matrix, but with nice features</li>
+<li>S4 object: a more complex kinds of user-defined data structure, we won’t see them</li>
+</ul>
+<p>In R, I most often work with vectors and dataframes. Vectors and matrices come up in many other programming languages for all kinds of purposes; data frames are also popular for data analysis.</p>
+<pre class="r"><code>1 + 1</code></pre>
+<pre><code>## [1] 2</code></pre>
+<pre class="r"><code># &#39;1&#39; + 1 won&#39;t run
+
+# vector
+vec1 &lt;- c(1, 2, 3, 4)
+vec1</code></pre>
+<pre><code>## [1] 1 2 3 4</code></pre>
+<pre class="r"><code>vec1[2] # index in with square brackets</code></pre>
+<pre><code>## [1] 2</code></pre>
+<pre class="r"><code># collection of vectors = a matrix
+vec2 &lt;- c(4, 5, 6, 7)
+m1 &lt;- matrix(c(vec1, vec2)) # default is just to make a column
+m1</code></pre>
+<pre><code>##      [,1]
+## [1,]    1
+## [2,]    2
+## [3,]    3
+## [4,]    4
+## [5,]    4
+## [6,]    5
+## [7,]    6
+## [8,]    7</code></pre>
+<pre class="r"><code>m2 &lt;- matrix(c(vec1, vec2), nrow = 2, ncol = 4) # specify another shape 
+m2</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    3    4    6
+## [2,]    2    4    5    7</code></pre>
+<pre class="r"><code># get values out of a matrix with indexing
+m2[1, 2]</code></pre>
+<pre><code>## [1] 3</code></pre>
+<pre class="r"><code>m2[, 2] # access second column</code></pre>
+<pre><code>## [1] 3 4</code></pre>
+<pre class="r"><code>m2[1, ] # access first row</code></pre>
+<pre><code>## [1] 1 3 4 6</code></pre>
+<pre class="r"><code>m2[1, 1:3] # use this colon syntax if you don&#39;t want all columns/rows</code></pre>
+<pre><code>## [1] 1 3 4</code></pre>
+</div>
+<div id="base-r-and-packages-introducing-the-tidyverse" class="section level3">
+<h3>Base R and Packages: Introducing the Tidyverse</h3>
+<p>The base R language is pretty powerful on its own. But the true power of R comes from user-built packages, which provide a bundle of new functionalities.</p>
+<p>The most well-known group of packages for data analysis is called the <a href="https://www.tidyverse.org/">tidyverse</a>. This group of packages includes functions for the entire data analysis pipeline, from data ingestion and cleaning to analysis and visualization. They share a common design philosophy, syntax, and data structures.</p>
+</div>
+<div id="loading-data" class="section level3">
+<h3>Loading data</h3>
+<p>Most data is available in a csv file format or something else that a spreadsheet program can open. Loading this into R is very simple using the <code>readr</code> package.</p>
+<p>First, though, some key concepts:</p>
+<ul>
+<li><strong>working directory:</strong> where on your computer R is looking to find files (scripts, data, etc.)</li>
+<li><strong>environment:</strong> this is all the objects R is actively holding in memory for you</li>
+</ul>
+<pre class="r"><code># check working directory
+getwd()</code></pre>
+<pre><code>## [1] &quot;/Users/cecilemurray/Documents/coding/fried-R-workshop/lecture_notes&quot;</code></pre>
+<pre class="r"><code># load the tidyverse core packages
+library(tidyverse)
+
+# load the data: 
+# note you won&#39;t need the ../ but I do, because this file is in a subdirectory
+crimes &lt;- read_csv(&quot;../data/Crimes_-_2018.csv&quot;)</code></pre>
+<p>We can see that <code>crimes</code> is now an object in our environment. We can click on it to view it, or use <code>View(crimes)</code>.</p>
+<p>Crimes is a data frame, which is basically a more sophisticated kind of matrix.</p>
+<pre class="r"><code># this is a way of looking at it in the console
+glimpse(crimes)</code></pre>
+<pre><code>## Observations: 267,687
+## Variables: 22
+## $ ID                     &lt;dbl&gt; 11323155, 11230111, 11499496, 11499495, 1…
+## $ `Case Number`          &lt;chr&gt; &quot;JB273997&quot;, &quot;JB151151&quot;, &quot;JB487217&quot;, &quot;JB49…
+## $ Date                   &lt;chr&gt; &quot;05/11/2018 03:27:00 PM&quot;, &quot;02/12/2018 03:…
+## $ Block                  &lt;chr&gt; &quot;016XX N TRIPP AVE&quot;, &quot;049XX W KINZIE ST&quot;,…
+## $ IUCR                   &lt;chr&gt; &quot;1752&quot;, &quot;0266&quot;, &quot;2024&quot;, &quot;1812&quot;, &quot;1812&quot;, &quot;…
+## $ `Primary Type`         &lt;chr&gt; &quot;OFFENSE INVOLVING CHILDREN&quot;, &quot;CRIM SEXUA…
+## $ Description            &lt;chr&gt; &quot;AGG CRIM SEX ABUSE FAM MEMBER&quot;, &quot;PREDATO…
+## $ `Location Description` &lt;chr&gt; &quot;RESIDENCE&quot;, &quot;RESIDENCE&quot;, &quot;RESIDENCE&quot;, &quot;A…
+## $ Arrest                 &lt;lgl&gt; FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, TR…
+## $ Domestic               &lt;lgl&gt; TRUE, TRUE, FALSE, FALSE, FALSE, TRUE, FA…
+## $ Beat                   &lt;chr&gt; &quot;2534&quot;, &quot;1532&quot;, &quot;2222&quot;, &quot;0421&quot;, &quot;0822&quot;, &quot;…
+## $ District               &lt;chr&gt; &quot;025&quot;, &quot;015&quot;, &quot;022&quot;, &quot;004&quot;, &quot;008&quot;, &quot;016&quot;,…
+## $ Ward                   &lt;dbl&gt; 26, 37, 21, 7, 14, 38, 24, 34, 46, 35, 5,…
+## $ `Community Area`       &lt;dbl&gt; 23, 25, 73, 43, 63, 76, 29, 49, 3, 21, 43…
+## $ `FBI Code`             &lt;chr&gt; &quot;17&quot;, &quot;02&quot;, &quot;18&quot;, &quot;18&quot;, &quot;18&quot;, &quot;02&quot;, &quot;01A&quot;…
+## $ `X Coordinate`         &lt;dbl&gt; 1147801, 1143287, NA, NA, NA, NA, 1148551…
+## $ `Y Coordinate`         &lt;dbl&gt; 1910610, 1902272, NA, NA, NA, NA, 1894943…
+## $ Year                   &lt;dbl&gt; 2018, 2018, 2018, 2018, 2018, 2018, 2018,…
+## $ `Updated On`           &lt;chr&gt; &quot;12/16/2019 03:48:59 PM&quot;, &quot;12/16/2019 03:…
+## $ Latitude               &lt;dbl&gt; 41.91067, 41.88787, NA, NA, NA, NA, 41.86…
+## $ Longitude              &lt;dbl&gt; -87.73247, -87.74926, NA, NA, NA, NA, -87…
+## $ Location               &lt;chr&gt; &quot;(41.910667557, -87.732469532)&quot;, &quot;(41.887…</code></pre>
+<pre class="r"><code># each column is a vector, but we can refer to them by name
+crimes$Date[1:10]</code></pre>
+<pre><code>##  [1] &quot;05/11/2018 03:27:00 PM&quot; &quot;02/12/2018 03:00:00 PM&quot;
+##  [3] &quot;10/23/2018 03:38:11 PM&quot; &quot;10/31/2018 07:31:36 AM&quot;
+##  [5] &quot;05/03/2018 03:07:21 PM&quot; &quot;01/20/2018 10:00:00 PM&quot;
+##  [7] &quot;11/15/2018 01:37:00 AM&quot; &quot;02/01/2018 12:00:00 AM&quot;
+##  [9] &quot;10/01/2018 09:00:00 AM&quot; &quot;01/10/2018 12:00:00 PM&quot;</code></pre>
+</div>
 </div>
 
 
