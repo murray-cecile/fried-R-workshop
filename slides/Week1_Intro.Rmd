@@ -1,0 +1,61 @@
+---
+title: "Intro to Data Analysis in R for Public Policy"
+author: "Cecile Murray"
+date: "12/16/2019"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Course goals
+
+- Learn how to perform basic data analysis tasks in R
+- Learn some fundamental programming concepts that will help with learning new tools
+- Learn *when* and *how* writing code is better than Excel: choosing the right tool for the job
+
+## About me
+
+- 2nd year MSCAPP student at Harris
+- Formerly:
+  - Senior Research Assistant at The Brookings Institution's Metropolitan Policy Program
+  - Research Assistant at the Center on Budget and Policy Priorities (CBPP)
+- Alumna of the College: 
+  - econ + public policy AB'15 
+  - UCIPSS scholar
+
+## Overview of today
+
+1. Talk about when doing data analysis programmatically is advantageous
+2. Introduce the tools we'll be using in this series
+
+## Why write code?
+
+Some advantages:
+
+- easier to check (in some ways)
+- reproducible
+- scalable
+- perform more sophisticated analyses (e.g. regression, machine learning)
+
+Some disadvantages:
+
+- less accessible to broad audiences
+- can be more opaque
+- can be more time-consuming
+- more vulnerable to certain kinds of errors
+
+## About learning to code
+
+- Above all, it takes practice (and a lot of Googling)
+- Understanding key concepts and terms helps guide that self-directed learning
+
+## Why use R?
+
+## R vs. RStudio
+
+## Basics
+
+
+
