@@ -1,0 +1,98 @@
+---
+title: "Basic data cleaning and analysis"
+author: "Cecile Murray"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+libs <- c("here", "tidyverse", "magrittr", "knitr", "kableExtra", "janitor")
+lapply(libs, library, character.only = TRUE)
+```
+
+## Lesson goals
+
+- Introduce key terms and syntax
+- Introduce simple plotting in ggplot2
+- Introduce some typical data cleaning concepts and tools
+- Introduce basic commands to compute descriptive statistics
+- Introduce how to join two datasets
+
+
+## Terms and syntax
+
+### Key terminology
+
+- Objects: An object is some value or values held in memory, referenced with a name. In R, an object can be a single number, a vector, a dataframe, a function, a plot - pretty much anything. 
+
+- Variable: A variable is an object that stores data. People will also use the word variable to refer to the columns of a dataframe.
+
+- Functions: A function is a set of instructions for performing some computation. Functions are also sometimes called methods.
+  - In R, functions are objects. For example, we can write some code that adds 2 and divides by 3 to some number and give that code a name so we can reuse it lots of places (we'll do this next time). 
+  - An input value for a function is called an argument. People say they "pass" an object to a function, which "takes" that object as an argument.
+  - The output value from a function is a return value. People say a function "returns" some object.  
+
+### Pipes
+
+One of the most useful parts of the tidyverse comes from the pipe operator, which looks like this: `%>%`. 
+
+Pipes let us chain functions together, passing data frames along from one function to the next without needing to repeat the name of the function. Basically, you're "piping" the output of one function into the next function. Piping exists in many languages and you'll sometimes see it called "method chaining."
+
+Here's an example.
+
+```{r pipes}
+# this is the usual assignment arrow
+crimes <- read_csv("data/Crimes_-_2018.csv")
+
+# these are equivalent!
+glimpse(crimes)
+crimes %>% glimpse() # here we are using a pipe
+
+# here's a reflexive pipe, which basically modifies the original dataframe in place
+#   we are piping crimes into the clean_names() function 
+#   then assigning the name crimes to the result 
+crimes %<>% janitor::clean_names()
+```
+
+
+### Verbs: mutate
+
+Let's say we want to convert the district variable from a string into numeric. There's more than one way to do this in R, so again we'll look at the base R way and the tidyverse way:
+
+```{r newvar}
+# in base R, we can do this
+crimes$district_num <- as.numeric(crimes$district)
+
+# using the tidyverse:
+crimes %<>% mutate(district_num = as.numeric(district))
+
+
+
+```
+
+Both calls are a single line. Here are some things that are nice about the second way:
+
+- only need to type the name of the dataframe once (helpful if you have many variables)
+- 
+
+## Data cleaning
+
+Data often don't come in a format that is immediately ready for analysis. Usually, you'll need to perform some of the following steps:
+
+- converting variable types: string to numeric and vice versa, dates, etc
+- look for missingness
+- "recode" variables into useful categories
+- reshape the data: convert columns and rows
+- merge with another dataset
+
+
+Verbs: select, filter, mutate, rename
+
+## Descriptive stats
+
+group_by %>% sunmarize
+
+
+## Merging datasets
+## Join on 
