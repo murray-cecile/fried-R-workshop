@@ -18,3 +18,4 @@
 # - how many unique observations are there? (often but not always # rows)
 # - what are the mean, median, sum of different variables?
 # - how many different categories are there, and how many observations in each category?
+# - what data types are there? which ones are easy to work with?

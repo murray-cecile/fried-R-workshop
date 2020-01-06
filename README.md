@@ -27,8 +27,8 @@ The workshop goals are as follows:
 
 1. Why we use programming for data analysis + getting started in RStudio
 
-2. Basic data cleaning and assembly, summary statistics, and simple data visualization
+2. Basic data cleaning and assembly, summary statistics, and joins
 
-3. How to apply key programming concepts for creating scalable, flexible, reusable work product
+3. Data visualization
 
-4. TBD + advanced topics based on student interests
+4. How to apply key programming concepts for creating scalable, flexible, reusable work product

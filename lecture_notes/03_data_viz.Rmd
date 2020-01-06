@@ -1,0 +1,50 @@
+---
+title: "Data visualization"
+author: "Cecile Murray"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+libs <- c("here", "tidyverse", "magrittr", "knitr", "kableExtra", "janitor", "tidycensus")
+lapply(libs, library, character.only = TRUE)
+```
+
+## Lesson goals
+
+
+- Talk about effective data viz
+- Demonstrate a different way to get data (Census API)
+- Introduce ggplot2 and "the grammar of graphics"
+
+## Essential parts of a chart
+
+- declarative title
+- descriptive subtitle
+- axis labels
+- source
+- often, a legend 
+
+[Make "bad" vs "good charts]
+
+## Getting data from an API
+
+API = "Application-Program Interface"
+
+APIs are how software programs give each other data in mutually intelligible formats. These formats are generally not very human-readable, but data structures are consistent, which is good for programming.
+
+Data analysts like APIs because they remove the manual step of going to a website, clicking download, and moving the file to the right working directory.
+
+### Census API
+
+There is a very nice R package called `tidycensus` that makes getting US Census data very easy. 
+This is how easy it is:
+
+```{r census_pull}
+# get median household income of each county in the US
+medinc <- get_acs("county",
+                  table = "B01001",
+                  year = 2018)
+
+```
+
+**Bonus content:** 

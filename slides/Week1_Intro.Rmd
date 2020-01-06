@@ -50,8 +50,19 @@ Some disadvantages:
 
 ## About learning to code
 
-- Above all, it takes practice (and a lot of Googling)
+- Above all, it takes a ton of **practice** (and a lot of Googling)
 - Understanding key concepts and terms helps guide that self-directed learning
+- Learning is continuous because new tools are always being developed 
+
+## Writing "good" code
+
+There are lots of opinions about this topic. Here are mine:
+
+Characteristics of good code:
+
+- straight
+- formatted consistently (pick a style, and stick to it)
+- has comments 
 
 ## Why use R?
 
@@ -85,7 +96,11 @@ R = the programming language
 
 RStudio = an integrated development environment (IDE) for R, aka a nice interface
 
+## Resources for R
 
-
+- Intro materials: https://swcarpentry.github.io/r-novice-gapminder
+- A free online textbook: https://r4ds.had.co.nz/
+- rseek.org is an R-specific version of Google
+- #rstats Twitter 
 
 
