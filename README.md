@@ -32,3 +32,26 @@ The workshop goals are as follows:
 3. Data visualization
 
 4. How to apply key programming concepts for creating scalable, flexible, reusable work product
+
+## Resources for R
+
+- Intro materials: https://swcarpentry.github.io/r-novice-gapminder
+
+- A free online textbook: https://r4ds.had.co.nz/
+
+- rseek.org is an R-specific version of Google
+
+- #rstats Twitter 
+
+## Interesting datasets
+
+- Chicago open datasets: https://data.cityofchicago.org
+
+- U.S. Census Bureau data: https://data.census.gov/cedsci/
+
+- U.S. government data portal: https://data.gov/
+
+- World Bank data portal: https://data.worldbank.org/
+
+- Eclectic archive: https://data.world/jsvine/data-is-plural-archive
+

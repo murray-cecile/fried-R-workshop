@@ -33,6 +33,7 @@ Lillian:
 
 1. Talk about when doing data analysis programmatically is advantageous
 2. Introduce the tools we'll be using in this series
+3. Start playing with data!
 
 Key terms: script, package, working directory, environment 
 
@@ -110,7 +111,7 @@ RStudio = an integrated development environment (IDE) for R, aka a nice interfac
 
 - different panels: script, console, environment, files, packages, help 
 - console vs. scripts
-- Run commands by hitting enter (in the console) or highlighting and 
+- Run commands by hitting enter (in the console) or highlighting and either clicking run (clunky) or hitting command-enter 
 
 ## R Basics
 

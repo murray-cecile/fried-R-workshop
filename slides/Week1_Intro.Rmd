@@ -11,12 +11,6 @@ libs <- c("here", "tidyverse", "magrittr", "knitr", "kableExtra", "janitor")
 lapply(libs, library, character.only = TRUE)
 ```
 
-## Course goals
-
-- Learn how to perform basic data analysis tasks in R
-- Learn some fundamental programming concepts that will help with learning new tools
-- Learn *when* and *how* writing code is better than Excel: choosing the right tool for the job
-
 ## About me
 
 - 2nd year MSCAPP student at Harris
@@ -27,10 +21,29 @@ lapply(libs, library, character.only = TRUE)
   - econ + public policy AB'15 
   - UCIPSS scholar
 
+## About you
+
+- Name and preferred pronouns
+- Year and major
+- In less than a sentence, what kind of data do you want to analyze?
+
+## Course goals
+
+- Learn how to perform basic data analysis tasks in R
+- Learn some fundamental programming concepts that will help with learning new tools
+- Learn *when* and *how* writing code is better than Excel: choosing the right tool for the job
+
+## Code of conduct
+
+- Be respectful of others' time 
+- Show courtesy to your classmates (and instructors)
+- Gracefully accept feedback
+
 ## Overview of today
 
 1. Talk about when doing data analysis programmatically is advantageous
 2. Introduce the tools we'll be using in this series
+3. Start playing with real data
 
 ## Why write code?
 
@@ -56,13 +69,9 @@ Some disadvantages:
 
 ## Writing "good" code
 
-There are lots of opinions about this topic. Here are mine:
-
-Characteristics of good code:
-
-- straight
-- formatted consistently (pick a style, and stick to it)
-- has comments 
+```{r, echo=FALSE}
+knitr::include_graphics("https://imgs.xkcd.com/comics/code_quality.png")
+```
 
 ## Why use R?
 
@@ -96,11 +105,14 @@ R = the programming language
 
 RStudio = an integrated development environment (IDE) for R, aka a nice interface
 
-## Resources for R
+## Demo
 
-- Intro materials: https://swcarpentry.github.io/r-novice-gapminder
-- A free online textbook: https://r4ds.had.co.nz/
-- rseek.org is an R-specific version of Google
-- #rstats Twitter 
+## Exercise
 
+1. Find and download a dataset you think is interesting.
 
+2. Load the data into R. 
+
+3. Explore it - try to learn 3-5 facts from summarizing the data.
+
+4. Share with your classmates!
