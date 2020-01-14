@@ -11,7 +11,7 @@ libs <- c("here", "tidyverse", "magrittr", "knitr", "kableExtra", "janitor")
 lapply(libs, library, character.only = TRUE)
 ```
 
-## About me
+## About us (Cecile)
 
 - 2nd year MSCAPP student at Harris
 - Formerly:
@@ -20,6 +20,15 @@ lapply(libs, library, character.only = TRUE)
 - Alumna of the College: 
   - econ + public policy AB'15 
   - UCIPSS scholar
+
+## About us (Lilian)
+- 2nd year MSCAPP student at Harris
+- Formerly:
+  - Research Assistant at NORC at the University of Chicago
+  - Research Assistant at Chapin Hall at the University of Chicago
+- Alumna of the College:
+  - econ + polisci AB'16
+  - UCIPSS scholar, UCPIP fellow
 
 ## About you
 
