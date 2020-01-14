@@ -26,8 +26,15 @@ lapply(libs, library, character.only = TRUE)
 
 You can reach me at cmmurray@uchicago.edu. You can also find me on [LinkedIn](https://www.linkedin.com/in/cecile-murray-929205a4/) or [Twitter](https://twitter.com/cecile_m_murray) (at your own risk).
 
-Lillian:
+**Lilian:**
 
+- 2nd year MSCAPP student at Harris
+- Formerly:
+  - Research Assistant at NORC at the University of Chicago
+  - Research Assistant at Chapin Hall at the University of Chicago
+- Alumna of the College (2016): econ + polisci, UCIPSS scholar, UCPIP fellow 
+
+You can reach me at lilianhj@uchicago.edu. I also have a personal [website](https://lilianhj.netlify.com/), a [LinkedIn](https://www.linkedin.com/in/lilianhj/), and a [Twitter](https://twitter.com/nailhauling).
 
 ## Overview of today
 
@@ -63,7 +70,7 @@ Key terms: script, package, working directory, environment
 
 - less accessible to broad audiences
   - other people may not be able to understand/check your work 
-- there are a whole alternative set of common errors
+- there is a whole alternative set of common errors
   - you spend less time looking at the values, so you may not recognize erroneous outliers
   - copy and paste danger: Excel alerts you when it thinks your formula doesn't match a pattern
 - can be more time-consuming on the first pass
@@ -226,7 +233,7 @@ Most data is available in a csv file format or something else that a spreadsheet
 First, though, some key concepts:
 
 - **working directory:** where on your computer R is looking to find files (scripts, data, etc.)
-- **environment:** this is all the objects R is actively holding in memory for you
+- **environment:** this is all the objects R is actively holding in memory for you, which you can access again by typing the object name
 
 ```{r load_crimes, message=FALSE}
 
