@@ -7,6 +7,8 @@
 # set your working directory
 
 # load any packages you plan to use
+# usually a good start:
+# library(tidyverse)
 
 # load in your data
 
