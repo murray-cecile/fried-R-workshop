@@ -190,12 +190,13 @@ Basic types:
 
 Data structures:
 
-- Vectors: a list of values (numbers, strings, etc)
-- Matrix: a group of vectors
-- Data frame: a matrix, but with nice features 
-- S4 object: a more complex kinds of user-defined data structure, we won't see them
+In R, I most often work with scalars, vectors, and dataframes. 
 
-In R, I most often work with vectors and dataframes. Vectors and matrices come up in many other programming languages for all kinds of purposes; data frames are also popular for data analysis.
+- Scalar: a single value (e.g. the number 5)
+- Vectors: a list of values (numbers, character strings, etc)
+- Matrices: a list of vectors of the same type (numeric, character, etc). You can think of a matrix like a table where each vector is a column.
+- Data frame: a table, similar to a single Excel sheet, with named columns. Every row has the same number of columns and every column has the same number of rows. 
+
 
 ```{r basic_types}
 1 + 1
@@ -203,7 +204,7 @@ In R, I most often work with vectors and dataframes. Vectors and matrices come u
 
 # vector
 vec1 <- c(1, 2, 3, 4)
-vec1
+vec1 
 vec1[2] # index in with square brackets
 
 # collection of vectors = a matrix
@@ -220,15 +221,24 @@ m2[1, ] # access first row
 m2[1, 1:3] # use this colon syntax if you don't want all columns/rows
 ```
 
+Functions:
+
+We'll talk a lot more about functions later in the series, but for now, think of a function as a canned bit of code that performs some common operation. 
+
+To use a grammar analogy, a data structure is a noun - it's *what* you are manipulating. A function is a verb - it's *how* you are manipulating that data.
+
+As a note on vocabulary, when people use a function, they often say they have "called" that function.
+
+
 ### Base R and Packages: Introducing the Tidyverse
 
-The base R language is pretty powerful on its own. But the true power of R comes from user-built packages, which provide a bundle of new functionalities. 
+The base R language is pretty powerful on its own. But the true power of R comes from user-built packages, which are essentially a bundle of related bits of code that help automate or streamline common tasks. Often these bits of code are functions. 
 
 The most well-known group of packages for data analysis is called the [tidyverse](https://www.tidyverse.org/). This group of packages includes functions for the entire data analysis pipeline, from data ingestion and cleaning to analysis and visualization. They share a common design philosophy, syntax, and data structures.
 
 ### Loading data
 
-Most data is available in a csv file format or something else that a spreadsheet program can open. Loading this into R is very simple using the `readr` package.
+Most data is available in a csv file format or something else that a spreadsheet program like Excel can open. Loading this into R is very simple using functions from the `readr` package.
 
 First, though, some key concepts:
 
@@ -250,13 +260,18 @@ crimes <- read_csv("../data/Crimes_-_2018.csv")
 
 We can see that `crimes` is now an object in our environment. We can click on it to view it, or use `View(crimes)`. 
 
-Crimes is a data frame, which is basically a more sophisticated kind of matrix.
+Crimes is a data frame. Again, think of data frames like Excel spreadsheets, except that you're guaranteed your cells will have a rectangular shape (all rows have the same number of columns, all columns have the same number of rows). 
+
+One special thing about data frames is that columns have names. If we want to "index" (i.e. go to) a column, we can do that using the name of the data frame, a `$`, and the column name. Suppose we want the Date column: instead of needing to know the position of that column in the data frame, we can just use the name.
 
 ```{r explore_crimes}
 # this is a way of looking at it in the console
 glimpse(crimes)
 
 # each column is a vector, but we can refer to them by name
+crimes$Date
+
+# two ways of indexing: with $ and with []
 crimes$Date[1:10]
 
 # here are the column names
@@ -265,7 +280,10 @@ names(crimes)
 
 ### Basic cleaning and exploration (more to come)
 
-Notice above that some of these names have backticks surrounding them. That's because they contain spaces, which are not a valid part of names in R. Fixing this and standardizing them will make working with the data much easier.
+Notice above that some of these names have backticks surrounding them. That's because they contain spaces, which are not a valid part of names in R. 
+
+Fixing this and standardizing them will make working with the data much easier. I could do that manually, but instead I'm going to use a function from the `janitor` package.  
+
 
 ```{r renaming}
 # we could type out a new vector of names and do something like this:
