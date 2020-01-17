@@ -123,10 +123,15 @@ crimes$Date[1:10]
 # we can see the column names like this: 
 names(crimes)
 
-# to get rid of backticks and caps, we could type out a new vector of names:
-#  like, names(crimes) <- c("id", "case_number", "date", "block",...)
+# the spaces/caps in these names will be annoying:
+# crimes$Location Description  # this won't work
+crimes$`Location Description`[1:10] # we need these backtick things if there are spaces
 
-# instead, let's use a function from the janitor package:
+# to get rid of spaces and caps, we could type out a new vector of names and assign them
+# original_names <- names(crimes)
+# names(crimes) <- c("id", "case_number", "date", "block",...)
+
+# this is tedious and error-prone so instead, let's use a function from the janitor package:
 crimes <- janitor::clean_names(crimes)
 
 # much better

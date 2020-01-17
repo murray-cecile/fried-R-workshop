@@ -1,12 +1,16 @@
 ---
 title: "Workshop 1: Introduction to Data Analysis in R for Public Policy"
 output: pdf_document
+header-includes: 
+    - \usepackage{placeins}
 ---
 
 ```{r setup, include=FALSE}
 libs <- c("here", "tidyverse", "magrittr", "knitr", "kableExtra", "janitor")
 lapply(libs, library, character.only = TRUE)
 ```
+
+\FloatBarrier
 
 ### My goals for the course
 
@@ -24,7 +28,7 @@ lapply(libs, library, character.only = TRUE)
   - Research Assistant at the Center on Budget and Policy Priorities (CBPP)
 - Alumna of the College (2015): econ + public policy, UCIPSS scholar 
 
-You can reach me at cmmurray@uchicago.edu. You can also find me on [LinkedIn](https://www.linkedin.com/in/cecile-murray-929205a4/) or [Twitter](https://twitter.com/cecile_m_murray) (at your own risk).
+You can reach me at cmmurray@uchicago.edu. You can also find me on [LinkedIn](https://www.linkedin.com/in/cecile-murray-929205a4/) or [Twitter](https://twitter.com/cecile_m_murray).
 
 **Lilian:**
 
@@ -64,7 +68,6 @@ Key terms: script, package, working directory, environment
   - trying several alternative methods is more manageable
   - will work with 1M or 100K rows just as well as with 1K
 - perform more sophisticated analyses (e.g. regression, machine learning)
-- 
 
 **Disadvantages:**
 
@@ -230,7 +233,7 @@ m2[1, ] # access first row
 m2[1, 1:3] # use this colon syntax if you don't want all columns/rows
 ```
 
-Functions:
+### Functions:
 
 We'll talk a lot more about functions later in the series, but for now, think of a function as a canned bit of code that performs some common operation. 
 
@@ -239,7 +242,7 @@ To use a grammar analogy, a data structure is a noun - it's *what* you are manip
 As a note on vocabulary, when people use a function, they often say they have "called" that function.
 
 
-### Base R and Packages: Introducing the Tidyverse
+## Base R and Packages: Introducing the Tidyverse
 
 The base R language is pretty powerful on its own. But the true power of R comes from user-built packages, which are essentially a bundle of related bits of code that help automate or streamline common tasks. Often these bits of code are functions. 
 
@@ -284,22 +287,10 @@ One special thing about data frames is that columns have names. If we want to "i
 glimpse(crimes)
 
 # each column is a vector, but we can refer to them by name
-crimes$Date
+# crimes$Date  # commenting this out in lecture notes to minimize printing
 
 # two ways of indexing: with $ and with []
 crimes$Date[1:10]
-
-# we can see the column names like this: 
-names(crimes)
-
-# to get rid of backticks and caps, we could type out a new vector of names:
-#  like, names(crimes) <- c("id", "case_number", "date", "block",...)
-
-# instead, let's use a function from the janitor package:
-crimes <- janitor::clean_names(crimes)
-
-# much better
-names(crimes)
 ```
 
 ### Basic cleaning and exploration (more to come)
@@ -310,11 +301,18 @@ Fixing this and standardizing them will make working with the data much easier. 
 
 
 ```{r renaming}
-# we could type out a new vector of names and do something like this:
-original_names <- names(crimes)
+# we can see the column names like this: 
+names(crimes)
+
+# the spaces/caps in these names will be annoying:
+# crimes$Location Description  # this won't work
+crimes$`Location Description`[1:10] # we need these backtick things if there are spaces
+
+# to get rid of spaces and caps, we could type out a new vector of names and assign them
+# original_names <- names(crimes)
 # names(crimes) <- c("id", "case_number", "date", "block",...)
 
-# instead, let's use a function from the janitor package:
+# this is tedious and error-prone so instead, let's use a function from the janitor package:
 crimes <- janitor::clean_names(crimes)
 
 # much better
@@ -328,13 +326,13 @@ Some other simple exploration using commands (functions!) available in base R (n
 nrow(crimes)
 
 # how many arrests?
-sum(crimes$Arrest)
+sum(crimes$arrest)
 
 # how many kinds of crime?
-length(unique(crimes$`Primary Type`))
+length(unique(crimes$primary_type))
 
 # count of crimes by type
-table(crimes$`Primary Type`)
+table(crimes$primary_type)
 ```
 
 ## Exercise: 
