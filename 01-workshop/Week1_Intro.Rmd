@@ -1,0 +1,127 @@
+---
+title: "Intro to Data Analysis in R for Public Policy"
+author: "Cecile Murray"
+date: "12/16/2019"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+libs <- c("here", "tidyverse", "magrittr", "knitr", "kableExtra", "janitor")
+lapply(libs, library, character.only = TRUE)
+```
+
+## About us (Cecile)
+
+- 2nd year MSCAPP student at Harris
+- Formerly:
+  - Senior Research Assistant at The Brookings Institution's Metropolitan Policy Program
+  - Research Assistant at the Center on Budget and Policy Priorities (CBPP)
+- Alumna of the College: 
+  - econ + public policy AB'15 
+  - UCIPSS scholar
+
+## About us (Lilian)
+- 2nd year MSCAPP student at Harris
+- Formerly:
+  - Research Assistant at NORC at the University of Chicago
+  - Research Assistant at Chapin Hall at the University of Chicago
+- Alumna of the College:
+  - econ + polisci AB'16
+  - UCIPSS scholar, UCPIP fellow
+
+## About you
+
+- Name and preferred pronouns
+- Year and major
+- In less than a sentence, what kind of data do you want to analyze?
+
+## Course goals
+
+- Learn how to perform basic data analysis tasks in R
+- Learn some fundamental programming concepts that will help with learning new tools
+- Learn *when* and *how* writing code is better than Excel: choosing the right tool for the job
+
+## Code of conduct
+
+- Be respectful of others' time 
+- Show courtesy to your classmates (and instructors)
+- Gracefully accept feedback
+
+## Overview of today
+
+1. Talk about when doing data analysis programmatically is advantageous
+2. Introduce the tools we'll be using in this series
+3. Start playing with real data
+
+## Why write code?
+
+Some advantages:
+
+- easier to check (in some ways)
+- reproducible
+- scalable
+- perform more sophisticated analyses (e.g. regression, machine learning)
+
+Some disadvantages:
+
+- less accessible to broad audiences
+- can be more opaque
+- can be more time-consuming
+- more vulnerable to certain kinds of errors
+
+## About learning to code
+
+- Above all, it takes a ton of **practice** (and a lot of Googling)
+- Understanding key concepts and terms helps guide that self-directed learning
+- Learning is continuous because new tools are always being developed 
+
+## Writing "good" code
+
+```{r, echo=FALSE}
+knitr::include_graphics("https://imgs.xkcd.com/comics/code_quality.png")
+```
+
+## Why use R?
+
+```{r whyR, echo=FALSE, warning=FALSE}
+use_cases <- c("Free?",
+               "Nice user interface",
+               "Ease of data assembly",
+               "Ease of descriptive stats",
+               "Quality of visualization",
+               "More complex modeling",
+               "General-purpose programming")
+
+tools <- c("Excel", "Stata", "Python", "R")
+
+r <- c("Yes", "Yes", "Excellent", "Very good", "Excellent", "Yes", "Yes")
+excel <- c("No*", "Yes", "Good", "Very good", "Good", "No", "No")
+stata <- c("No", "Yes", "Good", "Excellent", "Mediocre", "Yes", "No")
+python <- c("Yes", "No", "Good", "Good", "Good", "Yes", "Yes")
+
+# make a table out of these
+tibble(use_cases, excel, stata, python, r) %>% 
+  kable(caption = "Comparing common data analysis tools", 
+        col.names = c("", tools)) %>% 
+  kable_styling(latex_options = "HOLD") %>% 
+  add_footnote("*But your organization probably already paid for MS Office")
+```
+
+## R vs. RStudio
+
+R = the programming language
+
+RStudio = an integrated development environment (IDE) for R, aka a nice interface
+
+## Demo
+
+## Exercise
+
+1. Find and download a dataset you think is interesting.
+
+2. Load the data into R. 
+
+3. Explore it - try to learn 3-5 facts from summarizing the data.
+
+4. Share with your classmates!

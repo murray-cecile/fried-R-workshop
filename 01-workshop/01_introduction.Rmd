@@ -1,0 +1,353 @@
+---
+title: "Workshop 1: Introduction to Data Analysis in R for Public Policy"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+libs <- c("here", "tidyverse", "magrittr", "knitr", "kableExtra", "janitor")
+lapply(libs, library, character.only = TRUE)
+```
+
+### My goals for the course
+
+- Learn how to perform basic data analysis tasks in R
+- Learn some fundamental programming concepts that will help with learning new tools
+- Learn *when* and *how* writing code is better than Excel: choosing the right tool for the job
+
+### About your instructors
+
+**Cecile:**
+
+- 2nd year MSCAPP student at Harris
+- Formerly:
+  - Senior Research Assistant at The Brookings Institution's Metropolitan Policy Program
+  - Research Assistant at the Center on Budget and Policy Priorities (CBPP)
+- Alumna of the College (2015): econ + public policy, UCIPSS scholar 
+
+You can reach me at cmmurray@uchicago.edu. You can also find me on [LinkedIn](https://www.linkedin.com/in/cecile-murray-929205a4/) or [Twitter](https://twitter.com/cecile_m_murray) (at your own risk).
+
+**Lilian:**
+
+- 2nd year MSCAPP student at Harris
+- Formerly:
+  - Research Assistant at NORC at the University of Chicago
+  - Research Assistant at Chapin Hall at the University of Chicago
+- Alumna of the College (2016): econ + polisci, UCIPSS scholar, UCPIP fellow 
+
+You can reach me at lilianhj@uchicago.edu. I also have a personal [website](https://lilianhj.netlify.com/), a [LinkedIn](https://www.linkedin.com/in/lilianhj/), and a [Twitter](https://twitter.com/nailhauling).
+
+## Overview of today
+
+1. Talk about when doing data analysis programmatically is advantageous
+2. Introduce the tools we'll be using in this series
+3. Start playing with data!
+
+Key terms: script, package, working directory, environment 
+
+**Question for the room:** What do you want to get out of this workshop series?  
+
+## Why write code?
+
+**Question for the room:** Who has ever programmed before?
+
+**Advantages over Excel:**
+
+- easier to check (in some ways): 
+  - The flow of your analysis is reflected in your code
+  - If following good coding practices, errors are likely to be systematic rather than idiosyncratic
+- reproducible:
+  - other people can replicate what you did = good social science
+  - also, you can replicate what you did 
+  - repeating your analysis with updated data is very easy
+- scalable:
+  - you can automate many tedious steps of data cleaning 
+  - trying several alternative methods is more manageable
+  - will work with 1M or 100K rows just as well as with 1K
+- perform more sophisticated analyses (e.g. regression, machine learning)
+- 
+
+**Disadvantages:**
+
+- less accessible to broad audiences
+  - other people may not be able to understand/check your work 
+- there is a whole alternative set of common errors
+  - you spend less time looking at the values, so you may not recognize erroneous outliers
+  - copy and paste danger: Excel alerts you when it thinks your formula doesn't match a pattern
+- can be more time-consuming on the first pass
+  - this becomes less true as you get more practice
+
+## Why use R?
+
+- Open source (free!) but still offers nice interface and project management tools through RStudio
+- Great functionality for performing many kinds of descriptive analysis and modeling
+- Excellent visualization tools
+- Allows for some general-purpose programming 
+- Vibrant, engaged user community
+
+```{r whyR, echo=FALSE, warning=FALSE}
+use_cases <- c("Free?",
+               "Nice user interface",
+               "Ease of data assembly",
+               "Ease of descriptive stats",
+               "Quality of visualization",
+               "More complex modeling",
+               "General-purpose programming")
+
+tools <- c("Excel", "Stata", "Python", "R")
+
+r <- c("Yes", "Yes", "Excellent", "Very good", "Excellent", "Yes", "Yes")
+excel <- c("No*", "Yes", "Good", "Very good", "Good", "No", "No")
+stata <- c("No", "Yes", "Good", "Excellent", "Mediocre", "Yes", "No")
+python <- c("Yes", "No", "Good", "Good", "Good", "Yes", "Yes")
+
+# make a table out of these
+tibble(use_cases, excel, stata, python, r) %>% 
+  kable(caption = "Comparing common data analysis tools", 
+        col.names = c("", tools)) %>% 
+  kable_styling(latex_options = "HOLD") %>% 
+  add_footnote("*But your organization probably already paid for MS Office")
+```
+
+## R and RStudio
+
+R = the programming language
+
+RStudio = an integrated development environment (IDE) for R, aka a nice interface
+
+## Getting to know RStudio
+
+- different panels: script, console, environment, files, packages, help 
+- console vs. scripts
+- Run commands by hitting enter (in the console) or highlighting and either clicking run (clunky) or hitting command-enter 
+
+## R Basics
+
+### Basic mathematical operations in R
+
+Performing basic computations works pretty much as you'd expect: you can use the normal math operators and functions.
+
+```{r arithmetic}
+# R can do basic arithmetic
+1 + 1
+1 * 5
+(20 / 4) * 2
+2 ^ 2 
+2**2 # alternative way to do exponents
+
+# this is how you save a value in a variable: we are saying x is 5
+# think of this as associating a name with some object
+x <- 5
+x
+
+# we can also change the value of x
+x <- 7
+x == 5
+```
+
+### Comparisons and logical operators
+
+Programming languages are based on logical statements: expressions that are either true or false. Comparison operators and logical operators help us construct such statements.
+
+Comparison operators compare two things: for example, are they equal, or is one greater than or equal to the other. 
+
+```{r comparison_operators}
+# what's that double equals sign thing? it is a comparison operator.
+# now we can make logical statements (either true or false)
+1 == 1
+1 == 2
+1 != 2
+5 >= 4
+-1 < 0
+
+# side note on computers and decimal accuracy (this happens in Excel too)
+1.000000000000001 == 1
+1.0000000000000001 == 1
+```
+
+Logical operators allow you to combine true/false statements.
+
+```{r logical_ops}
+# we can combine these logical statements with logical operators 
+# & is AND: means both are true
+1 == 1 & 2 == 2 
+1 == 1 & 1 == 2
+
+# | is OR: means at least one is true
+1 == 1 & 1 == 2
+1 == 2 & 2 == 3
+
+# ! is NOT: means the statement is *not* true 
+!(1 == 1)
+!(1 == 2)
+```
+
+### Types of objects
+
+Basic types:
+
+- Numeric: 1, 3.14, 2020
+- Character, aka strings: 'a', "data"
+- Logical: TRUE or FALSE
+
+Data structures:
+
+- Scalar: a single value (e.g. the number 5)
+- Vectors: a list of values (numbers, character strings, etc)
+- Matrices: a list of vectors of the same type (numeric, character, etc). You can think of a matrix like a table where each vector is a column.
+- Data frame: a table, similar to a single Excel sheet, with named columns. Every row has the same number of columns and every column has the same number of rows. 
+
+In R, I most often work with scalars, vectors, and dataframes. We'll focus on these, but are some other kinds of data structures not listed above that you may encounter.
+
+
+```{r basic_types}
+5 # numeric
+"a" # character/string
+'a' # doesn't matter if you use single or double quotes, still a character
+
+# one reason why we care about types: 
+# we can't add numbers if one is stored as a string (this happens a lot)
+1 + 1
+# '1' + 1 doesn't work!
+
+# this is a vector: it's basically a list of values 
+vec1 <- c(1, 2, 3, 4)
+vec1 
+
+# to get the second value, index in with square brackets
+vec1[2] 
+
+# collection of vectors = a matrix
+vec2 <- c(4, 5, 6, 7)
+m1 <- matrix(c(vec1, vec2)) # default is just to make a column
+m1
+m2 <- matrix(c(vec1, vec2), nrow = 2, ncol = 4) # specify another shape 
+m2
+
+# get values out of a matrix with indexing
+m2[1, 2]
+m2[, 2] # access second column
+m2[1, ] # access first row
+m2[1, 1:3] # use this colon syntax if you don't want all columns/rows
+```
+
+Functions:
+
+We'll talk a lot more about functions later in the series, but for now, think of a function as a canned bit of code that performs some common operation. 
+
+To use a grammar analogy, a data structure is a noun - it's *what* you are manipulating. A function is a verb - it's *how* you are manipulating that data.
+
+As a note on vocabulary, when people use a function, they often say they have "called" that function.
+
+
+### Base R and Packages: Introducing the Tidyverse
+
+The base R language is pretty powerful on its own. But the true power of R comes from user-built packages, which are essentially a bundle of related bits of code that help automate or streamline common tasks. Often these bits of code are functions. 
+
+The most well-known group of packages for data analysis is called the [tidyverse](https://www.tidyverse.org/). This group of packages includes functions for the entire data analysis pipeline, from data ingestion and cleaning to analysis and visualization. They share a common design philosophy, syntax, and data structures.
+
+### Loading data
+
+Most data is available in a csv file format or something else that a spreadsheet program like Excel can open. Loading this into R is very simple using functions from the `readr` package.
+
+First, though, some key concepts:
+
+- **working directory:** where on your computer R is looking to find files (scripts, data, etc.)
+- **environment:** this is all the objects R is actively holding in memory for you, which you can access again by typing the object name
+
+```{r load_crimes, message=FALSE}
+
+# first we need to tell R where to look for files
+getwd() # tells us where we are
+# setwd('<your working directory here>') # sets the working directory
+# R projects organize this process nicely, but aren't strictly necessary
+
+list.files() # another way to see what's in your working directory
+
+# if you have never used the package before, you need to install it
+# install.packages("tidyverse")
+
+# then we can load it
+library(tidyverse)
+
+# load the data: note that if this file were saved elsewhere, this would fail
+crimes <- read_csv("Crimes_-_2018.csv")
+```
+
+We can see that `crimes` is now an object in our environment. We can click on it to view it, or use `View(crimes)`. 
+
+Crimes is a data frame. Again, think of data frames like Excel spreadsheets, except that you're guaranteed your cells will have a rectangular shape (all rows have the same number of columns, all columns have the same number of rows). 
+
+One special thing about data frames is that columns have names. If we want to "index" (i.e. go to) a column, we can do that using the name of the data frame, a `$`, and the column name. Suppose we want the Date column: instead of needing to know the position of that column in the data frame, we can just use the name.
+
+```{r explore_crimes}
+# this is a way of looking at it in the console
+glimpse(crimes)
+
+# each column is a vector, but we can refer to them by name
+crimes$Date
+
+# two ways of indexing: with $ and with []
+crimes$Date[1:10]
+
+# we can see the column names like this: 
+names(crimes)
+
+# to get rid of backticks and caps, we could type out a new vector of names:
+#  like, names(crimes) <- c("id", "case_number", "date", "block",...)
+
+# instead, let's use a function from the janitor package:
+crimes <- janitor::clean_names(crimes)
+
+# much better
+names(crimes)
+```
+
+### Basic cleaning and exploration (more to come)
+
+Notice above that some of these names have backticks surrounding them. That's because they contain spaces, which are not a valid part of names in R. 
+
+Fixing this and standardizing them will make working with the data much easier. I could do that manually, but instead I'm going to use a function from the `janitor` package.  
+
+
+```{r renaming}
+# we could type out a new vector of names and do something like this:
+original_names <- names(crimes)
+# names(crimes) <- c("id", "case_number", "date", "block",...)
+
+# instead, let's use a function from the janitor package:
+crimes <- janitor::clean_names(crimes)
+
+# much better
+names(crimes)
+```
+
+Some other simple exploration using commands (functions!) available in base R (no packages):
+
+```{r simple_summary}
+# how many crimes were reported last year?
+nrow(crimes)
+
+# how many arrests?
+sum(crimes$Arrest)
+
+# how many kinds of crime?
+length(unique(crimes$`Primary Type`))
+
+# count of crimes by type
+table(crimes$`Primary Type`)
+```
+
+## Exercise: 
+
+1. Go to data.cityofchicago.org. This is the city's open data portal. It hosts a lot of interesting datasets on topics from crime to 311 requests to rodent complaints. Find and download a dataset you think is interesting.
+
+2. Load the data into R. 
+
+3. Explore it - try to learn 3-5 facts from summarizing the data.
+
+Some best practices to follow:
+- keep your files organized in a folder system: for example, create a main project folder with one subfolder for raw data, one subfolder for R scripts, etc.
+- keep a record of how you downloaded the data, and keep a copy of your raw data that you do not modify
+- using the console is fine for exploration and debugging, but keep your successful commands in a script file
+- use comments to annotate your work
+- consider creating a final version of your script that contains only the code necessary to back up your key insights.
