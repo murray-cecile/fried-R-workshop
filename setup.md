@@ -36,9 +36,9 @@ You'll get a bunch of output that looks like R is downloading something and it w
 
 ## Download course materials
 
-You can find the course materials in ZIP files at https://github.com/murray-cecile/fried-R-workshop/WORKSHOP-MATERIALS. Here's how you download and unzip them:
+You can find the course materials in my GitHub repo at https://github.com/murray-cecile/fried-R-workshop. Here's how you download and unzip them:
 
-1. Go to https://github.com/murray-cecile/fried-R-workshop/WORKSHOP_MATERIALS.
+1. Go to https://github.com/murray-cecile/fried-R-workshop/tree/master/WORKSHOP-MATERIALS.
 
 2. Click on the ZIP file you want to download. This will take you to a new page.
 
