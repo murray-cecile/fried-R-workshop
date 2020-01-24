@@ -23,6 +23,7 @@ x
 
 # we can also change the value of x
 x <- 7
+x
 x == 5
 
 # what's that double equals sign thing? it is a comparison operator.
@@ -52,6 +53,7 @@ x == 5
 
 # DATA TYPES  =============================#
 
+TRUE # logical
 5 # numeric
 "a" # character/string
 'a' # doesn't matter if you use single or double quotes, still a character

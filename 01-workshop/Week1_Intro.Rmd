@@ -1,8 +1,10 @@
 ---
 title: "Intro to Data Analysis in R for Public Policy"
 author: "Cecile Murray"
-date: "12/16/2019"
-output: ioslides_presentation
+date: "Winter 2020"
+output:
+  ioslides_presentation: default
+  display: 'f'
 ---
 
 ```{r setup, include=FALSE}
@@ -10,6 +12,12 @@ knitr::opts_chunk$set(echo = FALSE)
 libs <- c("here", "tidyverse", "magrittr", "knitr", "kableExtra", "janitor")
 lapply(libs, library, character.only = TRUE)
 ```
+
+## Course goals
+
+- Learn how to perform basic data analysis tasks in R
+- Learn some fundamental programming concepts that will help with learning new tools
+- Learn *when* and *how* writing code is better than Excel: choosing the right tool for the job
 
 ## About us (Cecile)
 
@@ -34,13 +42,13 @@ lapply(libs, library, character.only = TRUE)
 
 - Name and preferred pronouns
 - Year and major
-- In less than a sentence, what kind of data do you want to analyze?
+- Have you ever programmed before?
 
-## Course goals
+## Overview of today
 
-- Learn how to perform basic data analysis tasks in R
-- Learn some fundamental programming concepts that will help with learning new tools
-- Learn *when* and *how* writing code is better than Excel: choosing the right tool for the job
+1. Talk about when doing data analysis programmatically is advantageous
+2. Introduce the tools we'll be using in this series
+3. Start playing with real data
 
 ## Code of conduct
 
@@ -48,11 +56,7 @@ lapply(libs, library, character.only = TRUE)
 - Show courtesy to your classmates (and instructors)
 - Gracefully accept feedback
 
-## Overview of today
-
-1. Talk about when doing data analysis programmatically is advantageous
-2. Introduce the tools we'll be using in this series
-3. Start playing with real data
+## Why write code?
 
 ## Why write code?
 
@@ -62,6 +66,16 @@ Some advantages:
 - reproducible
 - scalable
 - perform more sophisticated analyses (e.g. regression, machine learning)
+
+## Why write code?
+
+Some advantages:
+
+- easier to check (in some ways)
+- reproducible
+- scalable
+- perform more sophisticated analyses (e.g. regression, machine learning)
+
 
 Some disadvantages:
 
@@ -81,6 +95,8 @@ Some disadvantages:
 ```{r, echo=FALSE}
 knitr::include_graphics("https://imgs.xkcd.com/comics/code_quality.png")
 ```
+
+https://style.tidyverse.org/
 
 ## Why use R?
 
@@ -108,6 +124,14 @@ tibble(use_cases, excel, stata, python, r) %>%
   add_footnote("*But your organization probably already paid for MS Office")
 ```
 
+::: notes
+
+- it can do many things that Excel can't
+- free and open-source, unlike Excel or Stata: makes it easy to develop own 
+
+
+:::
+
 ## R vs. RStudio
 
 R = the programming language
@@ -119,6 +143,13 @@ RStudio = an integrated development environment (IDE) for R, aka a nice interfac
 ## Exercise
 
 1. Find and download a dataset you think is interesting.
+
+    - Chicago open datasets: https://data.cityofchicago.org
+    - U.S. Census Bureau data: https://data.census.gov/cedsci/
+    - U.S. government data portal: https://data.gov/
+    - World Bank data portal: https://data.worldbank.org/
+    - Eclectic archive: https://data.world/jsvine/data-is-plural-archive
+
 
 2. Load the data into R. 
 
