@@ -44,8 +44,8 @@ x == 5
 1 == 1 & 1 == 2
 
 # | is OR: means at least one is true
-1 == 1 & 1 == 2
-1 == 2 & 2 == 3
+1 == 1 | 1 == 2
+1 == 2 | 2 == 3
 
 # ! is NOT: means the statement is *not* true 
 !(1 == 1)
@@ -121,17 +121,16 @@ crimes$Date
 # two ways of indexing: with $ and with []
 crimes$Date[1:10]
 
-
 # we can see the column names like this: 
 names(crimes)
 
 # the spaces/caps in these names will be annoying:
-# crimes$Location Description  # this won't work
+crimes$Location Description  # this won't work
 crimes$`Location Description`[1:10] # we need these backtick things if there are spaces
 
 # to get rid of spaces and caps, we could type out a new vector of names and assign them
-# original_names <- names(crimes)
-# names(crimes) <- c("id", "case_number", "date", "block",...)
+original_names <- names(crimes)
+names(crimes) <- c("id", "case_number", "date", "block",...)
 
 # this is tedious and error-prone so instead, let's use a function from the janitor package:
 crimes <- janitor::clean_names(crimes)
@@ -147,11 +146,11 @@ names(crimes)
 nrow(crimes)
 
 # how many arrests?
-sum(crimes$Arrest)
+sum(crimes$arrest)
 
 # how many kinds of crime?
-length(unique(crimes$`Primary Type`))
+length(unique(crimes$primary_type))
 
 # count of crimes by type
-table(crimes$`Primary Type`)
+table(crimes$primary_type)
 

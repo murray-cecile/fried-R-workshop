@@ -124,13 +124,6 @@ tibble(use_cases, excel, stata, python, r) %>%
   add_footnote("*But your organization probably already paid for MS Office")
 ```
 
-::: notes
-
-- it can do many things that Excel can't
-- free and open-source, unlike Excel or Stata: makes it easy to develop own 
-
-
-:::
 
 ## R vs. RStudio
 
