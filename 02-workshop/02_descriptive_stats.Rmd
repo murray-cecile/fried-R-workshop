@@ -7,7 +7,13 @@ editor_options:
 ---
 
 ```{r setup, include=FALSE}
-libs <- c("here", "tidyverse", "magrittr", "knitr", "kableExtra", "janitor")
+libs <- c("here",
+          "tidyverse",
+          "magrittr",
+          "purrr",
+          "knitr", 
+          "kableExtra",
+          "janitor")
 lapply(libs, library, character.only = TRUE)
 ```
 
@@ -24,13 +30,16 @@ lapply(libs, library, character.only = TRUE)
 
 - Objects: An object is some value or values held in memory, referenced with a name. In R, an object can be a single number, a vector, a dataframe, a function, a plot - pretty much anything. 
 
-- Variable: A variable is an object that stores data. People will also use the word variable to refer to the columns of a dataframe.
-
 - Functions: A function is a set of instructions for performing some computation. Functions are also sometimes called methods.
   - In R, functions are objects. For example, we can write some code that adds 2 and divides by 3 to some number and give that code a name so we can reuse it lots of places (we'll do this next time). 
   - An input value for a function is called an argument. People say they "pass" an object to a function, which "takes" that object as an argument.
   - The output value from a function is a return value. People say a function "returns" some object.  
   - Often, people denote that something is a function by putting parentheses after its name, like so: `mutate()`
+
+### Data terminologu
+
+- Variable: refers to the columns of a dataframe (usually).
+- Observation: refers to one unit, often one row, of a dataframe
 
 ### Pipes
 
