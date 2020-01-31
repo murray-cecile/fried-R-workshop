@@ -1,0 +1,136 @@
+---
+title: "Summarizing data with dplyr and the tidyverse"
+author: "Cecile Murray"
+date: "2/7/2020"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+libs <- c("here",
+          "tidyverse",
+          "magrittr",
+          "knitr", 
+          "kableExtra")
+lapply(libs, library, character.only = TRUE)
+set.seed(2020)
+```
+
+## Goals for today
+
+- Go over some key terms and syntax
+- Introduce some typical data cleaning concepts and tools
+- Introduce basic commands to compute descriptive statistics and how to join two datasets
+- Use these on real data
+
+## Key terms
+
+- Variable: refers to the columns of a dataframe (usually).
+- Observation: refers to one unit, often one row, of a dataframe
+
+```{r df_terms, echo=FALSE}
+key_term_df <- tibble(
+  "person_id" = str_pad(as.character(seq(1, 4)), width = 2),
+  "age" = round(runif(4, 25, 85)),
+  "sex" = if_else(runif(4) > 0.5, "F", "M")
+)
+
+kable(key_term_df, align="l")
+```
+
+## tidyverse and dplyr verbs
+
+- `dplyr` is a package in the `tidyverse` family of packages
+- Common "grammar" for working with data, objects, functions, etc
+
+## Data cleaning: common tasks
+
+- converting variable types: string to numeric and vice versa, dates, etc
+- look for missing values
+- "recode" variables into useful categories
+- reshape the data: convert columns and rows
+- look up values in another dataset
+
+## **mutate**
+
+```{r mutate, echo=FALSE}
+key_term_df %>% kable(align = "l")
+
+key_term_df %<>% 
+  mutate("educ" = c("HS", "HS", "BA", "BA")) 
+
+key_term_df %>% kable(align = "l")
+
+```
+
+## **filter**
+
+```{r filter, echo=FALSE}
+key_term_df %>% kable(align = "l")
+
+key_term_df %>% 
+  filter(sex == "F") %>% 
+  kable(align = "l")
+
+```
+
+## **select**
+
+```{r select, echo=FALSE}
+key_term_df %>% kable(align = "l")
+
+key_term_df %>% 
+  select(person_id, age) %>% 
+  kable(align = "l")
+
+```
+
+## Summary statistics: examples
+
+- number of reported crimes of each type
+- % resulting in an arrest for each type of crime
+- average number of crimes by day of week
+
+## Merging tables with joins
+
+- **inner join**: keep only rows that have a match in both tables
+- **left join**: keep all rows in left table, discard rows in right table with no match
+- **right join**: keep all rows in right table, discard rows in left table with no match
+- **outer join**: keep all rows, regardless of whether there is a match
+
+## left_join or right_join
+
+```{r left_join, echo=FALSE}
+occp_df <- key_term_df %>% 
+  select(person_id) %>% 
+  mutate("occupation" = c("doctor", "lawyer", "engineer", "NA")) 
+occp_df %>% kable(align = "l") 
+
+occp_df %>% 
+  left_join(key_term_df, by = "person_id") %>% 
+  kable(align = "l")
+```
+
+## inner_join
+
+```{r inner_join, echo=FALSE}
+occp_df <- key_term_df %>% 
+  select(person_id) %>% 
+  mutate("occupation" = c("doctor", "lawyer", "engineer", "NA"))
+
+occp_df %>% 
+  left_join(key_term_df, by = "person_id") %>% 
+  kable(align = "l")
+```
+
+## full_join (aka outer join)
+
+```{r full_join, echo=FALSE}
+occp_df <- key_term_df %>% 
+  select(person_id) %>% 
+  mutate("occupation" = c("doctor", "lawyer", "engineer", "NA"))
+
+occp_df %>% 
+  left_join(key_term_df, by = "person_id") %>% 
+  kable(align = "l")
+```
+
