@@ -183,25 +183,18 @@ crimes_ct %<>% arrange(-count) # in descending order
 
 ```
 
-You can plug in many different summary measures. Here are some examples:
+You can plug in many different summary measures: sums, means, or your own custom function. Here are some examples:
 
 ```{r summaries}
 # count of arrests by type
 crimes_arrest_ct <- crimes %>% 
   group_by(primary_type) %>% 
-  summarize(arrests = sum(arrest, na.rm = TRUE))
-
-# mean ward by crime type (nonsensical example)
-crimes_ward <- crimes %>% 
-  group_by(primary_type) %>% 
-  summarize(mean_ward = mean(ward, na.rm = TRUE))
+  summarize(sum_arrests = sum(arrest, na.rm = TRUE))
 
 # example with multiple columns
 crimes_ward <- crimes %>% 
   group_by(primary_type) %>% 
-  summarize(mean_ward = mean(ward, na.rm = TRUE),
-            sum_ward = sum(ward, na.rm = TRUE))
-
+  summarize(sum_arrests =  mean(arrest, na.rm = TRUE))
 
 ```
 
@@ -230,7 +223,7 @@ In Excel, we could then do a VLOOKUP. In R, we're going to **join** in another t
 
 ```{r join_comm_areas}
 # first read in the file
-chicago_nhoods <- read_csv("../data/CommAreas.csv")
+chicago_nhoods <- read_csv("02-workshop/CommAreas.csv")
 glimpse(chicago_nhoods)
 
 # drop extraneous fields
