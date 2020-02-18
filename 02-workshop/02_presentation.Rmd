@@ -31,7 +31,7 @@ set.seed(2020)
 key_term_df <- tibble(
   "person_id" = str_pad(as.character(seq(1, 4)), width = 2),
   "age" = round(runif(4, 25, 85)),
-  "sex" = if_else(runif(4) > 0.5, "F", "M")
+  "sex" = c("F", "F", "M", "M")
 )
 
 kable(key_term_df, align="l")

@@ -1,0 +1,142 @@
+---
+title: "Data Visualization"
+author: "Cecile Murray"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+libs <- c("here",
+          "tidyverse",
+          "magrittr",
+          "knitr", 
+          "kableExtra")
+lapply(libs, library, character.only = TRUE)
+```
+
+## Lesson Goals
+
+- Talk about effective data viz
+- Introduce ggplot2 and "the grammar of graphics"
+- Practice
+
+## These data have the same summary stats
+
+```{r example1, echo=FALSE}
+data(anscombe)
+
+mydata <- with(anscombe,
+               tibble(xvalue = c(x1,x2,x3,x4),
+                      yvalue = c(y1,y2,y3,y4),
+                      dataset = gl(4,nrow(anscombe))))
+
+mydata %>% 
+  ggplot(aes(x = xvalue, y = yvalue, color = dataset)) +
+  geom_point() +
+  facet_wrap(~dataset, nrow = 2, ncol = 2) 
+```
+
+## 
+
+```{r healthmoney, echo=FALSE}
+include_graphics("life-expectancy-vs-health-expenditure.png")
+```
+
+## Visual encoding
+
+- Charts are pictures of data
+- Length, shape, color, etc convey information
+- These features can also be misleading
+
+## Charts need labels
+
+- declarative title
+- descriptive subtitle
+- axis labels
+- source
+- usually, a legend 
+
+## Example - no annotation
+
+```{r bar, echo=FALSE, message=FALSE, warning=FALSE}
+crimes <- read_csv("../01-workshop/Crimes_-_2018.csv") %>% 
+  janitor::clean_names()
+
+crimes_ct <- crimes %>% 
+  group_by(primary_type) %>% 
+  summarize(num_crimes = n()) %>% 
+  mutate(rank = rank(desc(num_crimes))) %>% 
+  filter(rank < 6)
+
+ggplot(data = crimes_ct,
+       aes(x = primary_type,
+           y = num_crimes)) +
+  geom_col(color = "blue")
+```
+
+## Example: annotated
+
+```{r barlabel, echo=FALSE}
+ggplot(data = crimes_ct,
+       aes(x = primary_type,
+           y = num_crimes)) +
+  geom_col(color = "blue") + 
+  labs(title = "Theft was the most common reported crime in Chicago in 2018",
+       subtitle = "Reported crimes by type, 2018",
+       x = "Crime Type",
+       y = "Number of crimes",
+       caption = "Source: City of Chicago data portal")
+```
+
+
+## Using ggplot
+
+- instead of chart types, we use geoms: bar, point, line, 
+- specify how to encode data using aesthetic parameters:
+  - `x`
+  - `y`
+  - `color`
+  - `fill`
+  - `shape`
+  - ...
+
+## Sample ggplot call
+
+```{ggplot1}
+ggplot(data = crimes_ct,
+       aes = (x = primary_type, 
+              y = num_crimes)) +
+  geom_col(color = "blue")
+```
+
+## Reshaping data
+
+- "wide" data has one row per observation with many columns
+- "long" data has multiple rows per observation with fewer columns
+- **ggplot often works best with long data**
+
+## Example of wide data
+
+```{r wide, echo=FALSE}
+key_term_df <- tibble(
+  "person_id" = str_pad(as.character(seq(1, 4)), width = 2),
+  "age" = round(runif(4, 25, 85)),
+  "sex" = c("F", "F", "M", "M")
+)
+
+kable(key_term_df, align="l")
+```
+
+## Example of long data
+
+```{r long, echo=FALSE}
+key_term_df %>% 
+  gather("key", "value", -person_id) %>% 
+  kable(align = "l")
+
+```
+
+## How to reshape in R
+
+- Go from wide to long: `gather()`  
+- Go from long to wide: `spread()` 
+- In tidyverse >= 1.0, `pivot_longer()` and `pivot_wider()` 

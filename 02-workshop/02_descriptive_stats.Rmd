@@ -7,14 +7,15 @@ editor_options:
 ---
 
 ```{r setup, include=FALSE}
-libs <- c("here",
-          "tidyverse",
+libs <- c("tidyverse",
           "magrittr",
-          "purrr",
-          "knitr", 
-          "kableExtra",
           "janitor")
 lapply(libs, library, character.only = TRUE)
+
+# check working directory
+getwd()
+
+library(magrittr)
 ```
 
 ## Lesson goals
@@ -51,7 +52,7 @@ Here's an example.
 
 ```{r pipes}
 # this is the usual assignment arrow
-crimes <- read_csv("../data/Crimes_-_2018.csv")
+crimes <- read_csv("../01-workshop/Crimes_-_2018.csv")
 
 # these are equivalent!
 glimpse(crimes)
@@ -60,7 +61,13 @@ crimes %>% glimpse() # here we are using a pipe
 # here's a reflexive pipe, which basically modifies the original dataframe in place
 #   we are piping crimes into the clean_names() function 
 #   then assigning the name crimes to the result 
+
+library(magrittr)
+crimes <- janitor::clean_names(crimes)
+
 crimes %<>% janitor::clean_names()
+
+crimes %>% glimpse()
 ```
 
 
@@ -90,8 +97,7 @@ crimes$district_num <- as.numeric(crimes$district)
 crimes %<>% mutate(district_num = as.numeric(district))
 
 # note that we could also do this to transform the district column itself
-# crimes %<>% mutate(district = as.numeric(district))
-
+crimes %<>% mutate(district = as.numeric(district))
 ```
 
 Both calls are a single line. Here are some things that are nice about the second way:
@@ -130,7 +136,7 @@ crimes2 <- crimes[, names_to_keep]
 # example of the contains() helper function - can't easily do this in base R
 crime_descr <- crimes %>%
   select(contains("description"))
-
+glimpse(crime_descr)
 ```
 
 ### Verbs: filter
@@ -223,13 +229,13 @@ In Excel, we could then do a VLOOKUP. In R, we're going to **join** in another t
 
 ```{r join_comm_areas}
 # first read in the file
-chicago_nhoods <- read_csv("02-workshop/CommAreas.csv")
+chicago_nhoods <- read_csv("CommAreas.csv")
 glimpse(chicago_nhoods)
 
 # drop extraneous fields
 chicago_nhoods %<>% select(COMMUNITY, AREA_NUMBE) 
 
-# now do a left join
+# now do a inner join
 crimes_nhood <- crimes %>% 
   group_by(community_area) %>% 
   summarize(count = n()) %>% 
